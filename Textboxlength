@@ -1,0 +1,35 @@
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                //Assign the text to span in pageload
+                $('#spntxtMult').text("Number of characters 0/1000");
+                //attach change event to div
+                $('#txtMult').keyup(function (event) {
+                    //call function to calcualate count on change event of div
+                    textCounter();
+                });
+            });
+            function textCounter() {
+                //Get the max length countnt
+                var divlength = $('#txtMult').val().length;
+                //check if count greater than 1000
+                if (divlength > 1000) {
+                    //Trim the text
+                    var trimmedtext = $('#txtMult').val().substring(0, 1000);
+                    //assign it to textbox
+                    $('#txtMult').val(trimmedtext);
+                }
+                else {
+                    var remaningchar = 0;
+                    //Calculate the remining char
+                    if (divlength > 0) {
+                        remaningchar = 1000 - divlength;
+                    }
+
+                    //reduce the allowed no of characters in span
+                    $('#spntxtMult').text("Number of characters " + remaningchar + "/1000");
+                }
+            }
+        </script>
+        <asp:TextBox ID="txtMult" runat="Server" TextMode="MultiLine" />
+        <span id="spntxtMult"></span>
